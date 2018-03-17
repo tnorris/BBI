@@ -10,7 +10,6 @@ void init(rack::Plugin *p) {
 	p->version = TOSTRING(VERSION);
 
 	// Add all Models defined throughout the plugin
-	p->addModel(modelMyModule);
 	p->addModel(modelDividah);
 
 	// Any other plugin initialization may go here.
