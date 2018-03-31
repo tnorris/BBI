@@ -2,6 +2,8 @@
 
 This project is based off of the VCVRack Template at https://github.com/vcvrack/template
 
+You can find patches in `examples/` showing off how the modules (ok, so far, *module*) can be used.
+
 # Modules
 ## Dividah
 ![Dividah Rack Module](https://github.com/tnorris/BBI/blob/master/doc/dividah.png?raw=true)
