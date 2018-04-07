@@ -98,4 +98,4 @@ struct DividahWidget : ModuleWidget {
 // author name for categorization per plugin, module slug (should never
 // change), human-readable module name, and any number of tags
 // (found in `include/tags.hpp`) separated by commas.
-Model *modelDividah = Model::create<Dividah, DividahWidget>("BBI", "Dividah", "Dividah", UTILITY_TAG);
+Model *modelDividah = Model::create<Dividah, DividahWidget>("BBI", "Dividah", "Dividah", CLOCK_MODULATOR_TAG);
