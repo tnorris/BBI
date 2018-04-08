@@ -25,9 +25,6 @@ struct Hooptie : Module {
     NUM_LIGHTS
   };
 
-  enum sequenceDirection { forward, back, ping, random, shotgun, single };
-  sequenceDirection direction = back;
-
   int bangCounter = 0;
 
   SchmittTrigger bangTrigger;
@@ -35,12 +32,20 @@ struct Hooptie : Module {
   SchmittTrigger modeTrigger;
 
   bool lastHigh = false;
+  enum pingPongDirection { pingForward, pingBack };
+  pingPongDirection ppDirection = pingForward;
+
+  enum sequenceDirection { seqForward, seqBack, seqPing, seqRandom, seqShotgun, seqSingle };
+  sequenceDirection direction = seqForward;
 
   Hooptie() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS) {}
   void step() override;
 
   void nextSequenceStep();
   void notify();
+
+  void incCtr();
+  void decCtr();
 
   float diceRoll = 0.f;
 
@@ -67,6 +72,28 @@ void Hooptie::notify() {
   }
 }
 
+void Hooptie::incCtr() {
+  bangCounter += 1;
+  if(bangCounter >= ROWS) {
+    if(direction == seqPing) {
+      ppDirection = pingBack;
+    } else {
+      bangCounter = bangCounter % ROWS;
+    }
+  }
+}
+
+void Hooptie::decCtr() {
+  bangCounter -= 1;
+  if(bangCounter < 0) {
+    if(direction == seqPing){
+      ppDirection = pingForward;
+    } else {
+      bangCounter = ROWS-1;
+    }
+  }
+}
+
 void Hooptie::nextSequenceStep() {
   bangTrigger.process(inputs[BANG_INPUT].value / 10.f );
 
@@ -79,21 +106,25 @@ void Hooptie::nextSequenceStep() {
 
   if(thisHigh && !lastHigh) {
     switch(direction) {
-      case forward:
-        bangCounter += 1;
-        bangCounter = bangCounter % ROWS;
+      case seqForward:
+        incCtr();
         break;
-      case back:
-        bangCounter -= 1;
-        if(bangCounter < 0) { bangCounter = ROWS-1; }
+      case seqBack:
+        decCtr();
         break;
-      case ping:
+      case seqPing:
+        if(ppDirection == pingForward) {
+          incCtr();
+        }
+        if(ppDirection == pingBack) {
+          decCtr();
+        } 
         break;
-      case random:
+      case seqRandom:
         break;
-      case shotgun:
+      case seqShotgun:
         break;
-      case single:
+      case seqSingle:
         if(bangCounter < ROWS) { bangCounter += 1; }
         break;
     }
@@ -107,25 +138,25 @@ void Hooptie::nextSequenceStep() {
 void Hooptie::step() {
   if(modeTrigger.process(params[MODE].value)) {
     switch(direction) {
-      case forward:
-        direction = back;
+      case seqForward:
+        direction = seqBack;
         break;
-      case back:
-        direction = ping;
+      case seqBack:
+        direction = seqPing;
         break;
-      case ping:
+      case seqPing:
         //direction = random;
         // skip a bit, brother
-        direction = single;
+        direction = seqSingle;
         break;
-      case random:
-        direction = shotgun;
+      case seqRandom:
+        direction = seqShotgun;
         break;
-      case shotgun:
-        direction = single;
+      case seqShotgun:
+        direction = seqSingle;
         break;
-      case single:
-        direction = forward;
+      case seqSingle:
+        direction = seqForward;
         break;
       }
   }
