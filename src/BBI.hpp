@@ -7,5 +7,6 @@ using namespace rack;
 extern Plugin *plugin;
 
 // Forward-declare each Model, defined in each module source file
-extern Model *modelDividah;
+extern Model *modelComparatah;
 extern Model *modelHooptie;
+extern Model *modelDividah;

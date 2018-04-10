@@ -5,6 +5,11 @@ This project is based off of the VCVRack Template at https://github.com/vcvrack/
 You can find patches in `examples/` showing off how the modules can be used.
 
 # Modules
+## Comparatah
+![Comparatah Rack Modules](https://github.com/tnorris/BBI/blob/master/doc/comparatah.png?raw=true)
+
+Comparatah compares the CV on the `IN` port to the knob (0.0v -> 10.0v) below it. If `IN` is greater than the knob, 10.0V is sent out, if it's less than the knob, 0.0V is sent out. I made this module so I could get a clean timing signal out of my PO-24.
+
 ## Dividah
 ![Dividah Rack Module](https://github.com/tnorris/BBI/blob/master/doc/dividah.png?raw=true)
 
