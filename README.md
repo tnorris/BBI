@@ -15,6 +15,11 @@ Comparatah compares the CV on the `IN` port to the knob (0.0v -> 10.0v) below it
 
 Dividah is a clock frequency divider. `IN` is the numerator, the 4 outputs (1, 2, 4, 8) are the denominators.
 
+## GetRekt
+![Get Rekt Rack Module](https://github.com/tnorris/BBI/blob/master/doc/getrekt.png?raw=true)
+
+Get Rekt is a rectifier. It outputs the absolute value of the incoming signal.
+
 ## Hooptie
 ![Hooptie Rack Module](https://github.com/tnorris/BBI/blob/master/doc/hooptie.png?raw=true)
 

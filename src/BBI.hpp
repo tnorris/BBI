@@ -10,3 +10,4 @@ extern Plugin *plugin;
 extern Model *modelComparatah;
 extern Model *modelHooptie;
 extern Model *modelDividah;
+extern Model *modelGetRekt;
