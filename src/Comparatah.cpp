@@ -57,15 +57,15 @@ struct ComparatahWidget : ModuleWidget {
 
 
     addInput(Port::create<PJ301MPort>(Vec(5, s), Port::INPUT, module, Comparatah::A));
-    addParam(ParamWidget::create<RoundBlackKnob>(Vec(5, s*2), module, Comparatah::B_KNOB, 0.0f, 10.0f, 0.0f));
+    addParam(ParamWidget::create<BBIOrangeKnob>(Vec(5, s*2), module, Comparatah::B_KNOB, 0.0f, 10.0f, 0.0f));
     addOutput(Port::create<PJ301MPort>(Vec(5, s*3), Port::OUTPUT, module, Comparatah::TOP_OUT));
 
     addInput(Port::create<PJ301MPort>(Vec(5, s*4.5), Port::INPUT, module, Comparatah::C));
-    addParam(ParamWidget::create<RoundBlackKnob>(Vec(5, s*5.5), module, Comparatah::D_KNOB, 0.0f, 10.0f, 0.0f));
+    addParam(ParamWidget::create<BBIOrangeKnob>(Vec(5, s*5.5), module, Comparatah::D_KNOB, 0.0f, 10.0f, 0.0f));
     addOutput(Port::create<PJ301MPort>(Vec(5, s*6.5), Port::OUTPUT, module, Comparatah::BOTTOM_OUT));
 
     addInput(Port::create<PJ301MPort>(Vec(5, s*8), Port::INPUT, module, Comparatah::E));
-    addParam(ParamWidget::create<RoundBlackKnob>(Vec(5, s*9), module, Comparatah::F_KNOB, 0.0f, 10.0f, 0.0f));
+    addParam(ParamWidget::create<BBIOrangeKnob>(Vec(5, s*9), module, Comparatah::F_KNOB, 0.0f, 10.0f, 0.0f));
     addOutput(Port::create<PJ301MPort>(Vec(5, s*10), Port::OUTPUT, module, Comparatah::LOWER_TOP_OUT));
   }
 };

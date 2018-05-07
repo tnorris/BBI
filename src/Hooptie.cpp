@@ -87,13 +87,13 @@ void Hooptie::step() {
 struct HooptieWidget : ModuleWidget {
   HooptieWidget(Hooptie *module) : ModuleWidget(module) {
     setPanel(SVG::load(assetPlugin(plugin, "res/hooptie.svg")));
-    addChild(Widget::create<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
+    addChild(Widget::create<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
 
     addChild(Widget::create<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
     for (int i = 0; i < ROWS; i++) {
       // add the chance knob
-      addParam(ParamWidget::create<RoundBlackKnob>(Vec(5, 30+(i*35)), module, Hooptie::GATE_CHANCE+i, 0.0f, 10.0f, 0.0f));
+      addParam(ParamWidget::create<BBIOrangeKnob>(Vec(5, 30+(i*35)), module, Hooptie::GATE_CHANCE+i, 0.0f, 10.0f, 0.0f));
 
       // add the LEDs
       addChild(ModuleLightWidget::create<MediumLight<GreenLight>>(Vec(70, 40+(i*35)), module, Hooptie::GATE_LIGHTS + i));
