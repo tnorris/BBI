@@ -28,6 +28,8 @@ struct Hooptie : Module {
 
   int bangCounter = 0;
 
+  int knobStyle = 0;
+
   SchmittTrigger bangTrigger;
   SchmittTrigger rstTrigger;
 
@@ -36,6 +38,17 @@ struct Hooptie : Module {
   Hooptie() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS) {}
   void step() override;
 
+  json_t *toJson() override {
+    json_t *root = json_object();
+    json_object_set_new(root, "knobStyle", json_integer(knobStyle));
+    return root;
+  }
+
+  void fromJson(json_t *root) override {
+    json_t *knob_style = json_object_get(root, "knobStyle");
+    knobStyle = json_integer_value(knob_style);
+  }
+
   float diceRoll = 0.f;
 
   // For more advanced Module features, read Rack's engine.hpp header file
@@ -43,7 +56,6 @@ struct Hooptie : Module {
   // - onSampleRateChange: event triggered by a change of sample rate
   // - onReset, onRandomize, onCreate, onDelete: implements special behavior when user clicks these from the context menu
 };
-
 
 void Hooptie::step() {
   bangTrigger.process(inputs[BANG_INPUT].value / 10.f );
@@ -81,9 +93,6 @@ void Hooptie::step() {
   lastHigh = thisHigh;
 }
 
-
-
-
 struct HooptieWidget : ModuleWidget {
   HooptieWidget(Hooptie *module) : ModuleWidget(module) {
     setPanel(SVG::load(assetPlugin(plugin, "res/hooptie.svg")));
@@ -113,6 +122,10 @@ struct HooptieWidget : ModuleWidget {
 
 
   }
+
+//  void appendContextMenu(Menu *menu) override { 
+//    Hooptie *module = dynamic_cast<Hooptie*>(this->module);
+// }
 };
 
 
